@@ -22,4 +22,6 @@ jobs:
         run: ./gradlew publish
         env:
           GITHUB_ACTOR: 'fa-dev-ob'
-          GITHUB_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PUBLISH_TEST_TOKEN }}
+#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
