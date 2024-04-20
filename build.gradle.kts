@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.23"
+    `maven-publish`
 }
 
 group = "dev.faob"
@@ -18,4 +19,22 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(11)
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/fa-dev-ob/fancy-calculator")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+        }
+    }
 }
